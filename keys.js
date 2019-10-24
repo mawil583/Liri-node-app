@@ -19,5 +19,9 @@ module.exports= {
   },
   omdb: {
     key: process.env.omdbID
-  },
+  }
+  // ,
+  // random: {
+  //   fileCommand: process.txt
+  // }
 }
