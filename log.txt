@@ -1,0 +1,4 @@
+Command: do-what-it-says; Value: undefined;
+Command: concert-this; Value: green day;
+Command: spotify-this-song; Value: beautiful;
+Command: spotify-this-song; Value: beautiful;
