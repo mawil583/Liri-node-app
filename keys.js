@@ -22,6 +22,6 @@ module.exports= {
   }
   // ,
   // random: {
-  //   fileCommand: process.txt
+  //   fileCommand: process.random.txt
   // }
 }

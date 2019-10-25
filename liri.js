@@ -1,27 +1,17 @@
+// globals and dependencies
 require("dotenv").config();
-
-var keys = require("./keys.js")
-// var random = require("./random.txt");
-
+var keys = require("./keys.js");
 var axios = require("axios");
-// console.log(keys);
 var moment = require("moment");
-
 let fs = require("fs");
-
-// console.log(spotify);
-
-// the "Spotify on line 11 should match the new "Spotify" on line 12
+// Personal note: the "Spotify on line 8 should match the new "Spotify" on line 9
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
-// console.log(Spotify)
-
-
 let command = process.argv[2];
 let value = process.argv[3];
-let userInput = `Command: ${command}; ` + `Value: ${value};
-`;
-
+let userInput = `Command: ${command}; ` +
+    `Value: ${value};
+    `;
 
 function switchStatement() {
     switch (command) {
@@ -43,7 +33,8 @@ function switchStatement() {
             break;
         default:
             appendEntries(userInput);
-            console.log("Invalid Input. For proper functioning, enter 'node liri.js ' into the command line and then a command from the switch statment.");
+            console.log(`Invalid Input. For proper functioning, enter 'node liri.js '
+                 into the command line and then a command from the switch statment.`);
     }
 };
 switchStatement();
@@ -51,7 +42,6 @@ switchStatement();
 function appendEntries(userInput) {
     fs.appendFile("log.txt", userInput, function (err) {
         if (err) throw err;
-        // console.log(userInput);
     })
 }
 
@@ -60,16 +50,42 @@ function spotifySearch(song) {
         if (err) {
             return console.log('Error occurred: ' + err);
         };
-        console.log("Artist name: " + data.tracks.items[0].artists[0].name);
-        console.log("Album name: " + data.tracks.items[0].album.name);
-        console.log("Song name: " + data.tracks.items[0].name);
-        console.log("Preview URL: " + data.tracks.items[0].preview_url);
         if (song == null) {
-            console.log("song is null");
-            console.log("since the query was empty I'm going to return the song 'the sign' by " + data.tracks.items[4].album.artists[0].name);
-        };
+            console.log("You did not input a song name.");
+            console.log(`Here is an example of the result you would have gotten if you typed "node liri.js spotify-this-song 'the sign'": 
+                artist name: ${data.tracks.items[4].album.artists[0].name} ${data.tracks.items[4].artists[0].name} album name: ${data.tracks.items[4].album.name}`);
+            // spotifyDefaultData();
+            console.log("Artist name: " + data.tracks.items[4].artists[0].name);
+            console.log("Album name: " + data.tracks.items[4].album.name);
+            console.log("Song name: " + data.tracks.items[4].name);
+            console.log("Preview URL: " + data.tracks.items[4].preview_url);
+        } else {
+            // spotifyData();
+            console.log("Artist name: " + data.tracks.items[0].artists[0].name);
+            console.log("Album name: " + data.tracks.items[0].album.name);
+            console.log("Song name: " + data.tracks.items[0].name);
+            console.log("Preview URL: " + data.tracks.items[0].preview_url);
+        }
+        // console.log("Artist name: " + data.tracks.items[0].artists[0].name);
+        // console.log("Album name: " + data.tracks.items[0].album.name);
+        // console.log("Song name: " + data.tracks.items[0].name);
+        // console.log("Preview URL: " + data.tracks.items[0].preview_url);
     });
 };
+
+// function spotifyData() {
+//     console.log("Artist name: " + data.tracks.items[0].artists[0].name);
+//     console.log("Album name: " + data.tracks.items[0].album.name);
+//     console.log("Song name: " + data.tracks.items[0].name);
+//     console.log("Preview URL: " + data.tracks.items[0].preview_url);
+// }
+
+// function spotifyDefaultData() {
+//     console.log("Artist name: " + data.tracks.items[4].artists[0].name);
+//     console.log("Album name: " + data.tracks.items[4].album.name);
+//     console.log("Song name: " + data.tracks.items[4].name);
+//     console.log("Preview URL: " + data.tracks.items[4].preview_url);
+// }
 
 function bandsSearch(bandName) { // bandname = michael jackson
     let BandsInTownID = keys.BandsInTown;
@@ -125,14 +141,9 @@ function readRandom() {
         };
         let randomArr = data.split(", ");
         command = randomArr[0];
+        console.log(command)
         value = randomArr[1];
+        console.log(value);
         switchStatement();
-    })
-    //     let randomFileContent = random;
-    //     // command = random[0];
-    //     // value = random[1];
-    //     console.log(randomFileContent);
-    //     // console.log(command);
-    //     // console.log(value);
-    //     // spotifySearch(randomFileContent);
+    });
 };
