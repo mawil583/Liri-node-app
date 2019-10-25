@@ -32,9 +32,6 @@
 # Video of my app in action:
 https://drive.google.com/file/d/1xTf5-2iwF4mqMEgHOqCt8fxH9H762a3k/view
 
-# Link to deployed version of the app:
-
-
 
 # List of technologies used:
     * Javascript
